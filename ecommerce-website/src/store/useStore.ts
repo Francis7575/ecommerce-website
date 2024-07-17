@@ -1,13 +1,41 @@
 import { create } from 'zustand'
-import { CartState } from '../types/types';
+import { CartState } from '../types/types'
 
 const useStore = create<CartState>((set) => ({
-    cart: [],
-    addToCart: (item) => set((state) => ({ cart: [...state.cart, item] })),
-    removeItemById: (item) => set((state) => ({
-        cart: state.cart.filter((cartItem) => cartItem.id !== item.id),
+    cartItems: [],
+    productQuantity: 1,
+    totalPrice: 0,
+    addToCart: (item) => set((state) => {
+        const existingItem = state.cartItems.find(cartItem => cartItem.id === item.id);
+        const updatedCartItems = existingItem
+            ? state.cartItems.map(cartItem =>
+                cartItem.id === item.id
+                    ? { ...cartItem, quantity: cartItem.quantity! + item.quantity! }
+                    : cartItem
+            )
+            : [...state.cartItems, item];
+        return {
+            cartItems: updatedCartItems,
+            totalPrice: item.price,
+        };
+    }),
+    removeItemById: (id: number) => set((state) => ({
+        cartItems: state.cartItems.filter((cartItem) => cartItem.id !== id),
     })),
-    clearCart: () => set({ cart: [] }),
+    clearCart: () => set({ cartItems: [] }),
+    increment: (basePrice: number) => set((state) => {
+        const newQuantity = state.productQuantity + 1;
+        return { productQuantity: newQuantity, totalPrice: newQuantity * basePrice };
+    }),
+    decrement: (basePrice: number) => set((state) => {
+        const newQuantity = state.productQuantity > 1 ? state.productQuantity - 1 : 1;
+        return { productQuantity: newQuantity, totalPrice: newQuantity * basePrice };
+    }),
+    setTotalPrice: (basePrice: number) => set((state) => ({ totalPrice: state.productQuantity * basePrice })),
+    resetProductQuantity: () => set({ productQuantity: 1 }),
 }));
 
 export default useStore;
+
+
+

@@ -1,4 +1,4 @@
-import data from '../shared/menu/data'
+import { Menuitems } from '../../utils/constants'
 import { Link } from 'react-router-dom'
 
 type ShopItemsProps = {
@@ -7,10 +7,10 @@ type ShopItemsProps = {
 
 const ShopItems = ({ padding }: ShopItemsProps) => {
 	return (
-		<main className='bg-almost-white px-[1.5rem]'>
-			<section className={`${padding}`}>
-				{data.map((item, idx) => (
-					<div key={idx} className={`bg-lightgray pb-[22px] rounded-[8px] ${idx === 2 ? '' : 'mb-[68px]'} flex flex-col items-center text-black font-bold uppercase`}>
+		<div className='bg-almost-white px-[1.5rem] md:px-[40px] md:mt-[90px]'>
+			<section className={`${padding} md:flex md:gap-[10px] md:w-full`}>
+				{Menuitems.map((item, idx) => (
+					<div key={idx} className={`bg-lightgray pb-[22px] md:flex-1 rounded-[8px] ${idx === 2 ? '' : 'mb-[68px] md:mb-0'} flex flex-col items-center text-black font-bold uppercase`}>
 						<img className='max-w-[80px] mt-[-45px]'
 							src={item.image} alt={item.alt} />
 						<p className='mt-[30px] text-[.935rem] tracking-[1.071px]'>
@@ -27,7 +27,7 @@ const ShopItems = ({ padding }: ShopItemsProps) => {
 					</div>
 				))}
 			</section>
-		</main>
+		</div>
 	)
 }
 

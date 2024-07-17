@@ -20,7 +20,8 @@ export default {
         'lightgray': '#F1F1F1',
         'almost-white': '#FAFAFA',
         'second-lightgray': 'hsl(0,0%,86%)',
-        'white': '#FFF'
+        'white': '#FFF',
+        'red': '#D73C3C'
       },
       backgroundImage: {
         'new-product-mobile': 'url("/assets/home/mobile/image-header.jpg")',

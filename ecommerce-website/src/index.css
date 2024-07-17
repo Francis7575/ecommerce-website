@@ -24,3 +24,10 @@ body {
     background-color: #D87D4A;
     z-index: 10;
 }
+
+.cart-container {
+    position: absolute;
+    top: 62px;
+    right: 25px;
+    width: 327px;
+}

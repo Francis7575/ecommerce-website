@@ -2,10 +2,11 @@ import { Link } from "react-router-dom"
 import MobileSpeaker from '/assets/product-zx9-speaker/mobile/zx9-speaker.png'
 import TabletSpeaker from '/assets/product-zx9-speaker/tablet/zx9-speaker.png'
 import DesktopSpeaker from '/assets/product-zx9-speaker/desktop/zx9-speaker.png'
+import { ViewProductProps } from "../../types/types"
 
-const ViewProduct = () => {
+const ViewProduct = ({ firstTo, secondTo, thirdTo }: ViewProductProps) => {
 	return (
-		<section className="px-[1.5rem]">
+		<section className="px-[1.5rem] md:px-[40px]">
 			<div className="bg-reddish-orange flex flex-col items-center text-center rounded-[8px] py-[55px]">
 				<picture>
 					<source srcSet={TabletSpeaker} media="(min-width: 768px)" />
@@ -19,16 +20,16 @@ const ViewProduct = () => {
 					Upgrade to premium speakers that are phenomenally built to
 					deliver truly remarkable sound.
 				</p>
-				<Link to="/" className="bg-black text-white text-[.813rem] tracking-[1px] uppercase font-bold py-[15px] px-[30px]">
+				<Link to={firstTo} className="bg-black text-white text-[.813rem] tracking-[1px] uppercase font-bold py-[15px] px-[30px]">
 					See Product
 				</Link>
 			</div>
-			<div className="mt-[1.5rem] test bg-ZX7-speaker-mobile md:bg-ZX7-speaker-tablet bg-no-repeat h-[367px] bg-cover ">
-				<div className="pl-[1.5rem] pt-[101px] uppercase font-bold w-full">
+			<div className="mt-[1.5rem] bg-ZX7-speaker-mobile md:bg-ZX7-speaker-tablet bg-no-repeat h-[320px]">
+				<div className="pl-[1.5rem] md:pl-[62px] pt-[101px] uppercase font-bold w-full">
 					<h2 className="mb-8 text-[1.75rem] tracking-[2px]">
 						ZX7 SPEAKER
 					</h2>
-					<Link to="/" className="border border-black text-[.813rem] tracking-[1px] py-[1rem] px-[30px]">
+					<Link to={secondTo} className="border border-black text-[.813rem] tracking-[1px] py-[1rem] px-[30px]">
 						See Product
 					</Link>
 				</div>
@@ -39,7 +40,7 @@ const ViewProduct = () => {
 					<h2 className="text-[1.75rem] tracking-[2px]">
 						YX1 EARPHONES
 					</h2>
-					<Link to="/" className="border border-black max-w-[160px] text-[.813rem] tracking-[1px] py-[1rem] text-center">
+					<Link to={thirdTo} className="border border-black max-w-[160px] text-[.813rem] tracking-[1px] py-[1rem] text-center">
 						See Product
 					</Link>
 				</div>

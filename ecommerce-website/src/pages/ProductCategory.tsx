@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
-import { Header, ShopItems, Announcement, Footer } from '../../components'
-import { Headphones, Speakers, Earphones } from "./Categories"
+import { Header, ShopItems, Announcement, Footer } from '../components'
+import { Headphones, Speakers, Earphones } from "../utils/constants"
 import { Link } from "react-router-dom"
 
 const ProductCategory = () => {
@@ -38,14 +38,14 @@ const ProductCategory = () => {
                         <picture className="w-full max-w-[689px]">
                             <source srcSet={item.desktop} media="(min-width: 1024px)" />
                             <source srcSet={item.tablet} media="(min-width: 768px)" />
-                            <img src={item.mobile} alt={item.title} />
+                            <img src={item.mobile} alt={item.name} />
                         </picture>
                         <div className={`flex flex-col items-center text-center gap-[1.5rem] md:gap-0 mb-[120px]`}>
                             <h3 className={` ${idx === 0 && 'mt-[2rem] mb-4'} text-[.875rem tracking-[10px] uppercase text-reddish-orange`}>
                                 {item.new}
                             </h3>
                             <h4 className={`text-second-black font-bold uppercase tracking-[1px] md:mb-[2rem] max-w-[387px] font-bold text-[1.75rem] md:text-[2.5rem] ${(idx === 1 || idx === 2) ? 'md:mt-[52px]' : ''}`}>
-                                {item.title}
+                                {item.name}
                             </h4>
                             <p className="text-[.935rem] leading-[25px] opacity-50 text-second-black md:mb-[1.5rem] max-w-[572px]">
                                 {item.paragraph}
