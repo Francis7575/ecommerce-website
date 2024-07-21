@@ -12,13 +12,13 @@ const Features = ({ productId }: FeaturesProps) => {
 	}
 
 	return (
-		<div className='mt-[88px]'>
-			<h2 className='text-[1.5rem] tracking-[0.857px] font-bold uppercase mb-[1.5rem]'>
+		<div className='mt-[88px] lg:mt-0'>
+			<h2 className='text-[1.5rem] lg:text-[2rem] leading-[36px] tracking-[0.857px] font-bold uppercase mb-[1.5rem] lg:mb-[2rem]'>
 				Features
 			</h2>
 			<div className='text-[.935rem] leading-[25px] opacity-70 text-second-black'>
-				<p className='mb-[1.4rem]'>{product.features.first}</p>
-				<p>{product.features.second}</p>
+				<p className='mb-[1.4rem] lg:max-w-[635px]'>{product.features.first}</p>
+				<p className='lg:max-w-[635px]'>{product.features.second}</p>
 			</div>
 		</div>
 	);

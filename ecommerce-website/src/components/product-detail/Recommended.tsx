@@ -14,26 +14,26 @@ const Recommended = ({ productId }: Props) => {
 	}
 
 	return (
-		<div className='mt-[100px] mb-[120px]'>
-			<h2 className='uppercase font-bold mb-[40px] tracking-[.857px] leading-[36px] text-[1.5rem] text-center'>
+		<div className='mt-[100px] mb-[120px] lg:mb-[140px]'>
+			<h2 className='uppercase font-bold mb-[40px] md:mb-[56px] md:mb-[64px] tracking-[.857px] leading-[36px] text-[1.5rem] md:text-[2rem] text-center'>
 				you may also like
 			</h2>
-			<div>
+			<div className='md:flex md:gap-[11px] lg:gap-[30px]'>
 				{product.others.map((other, idx) => (
 					<div key={idx} className={`text-center uppercase font-bold`}>
 						<picture>
 							<source media="(min-width: 1024px)" srcSet={other.image.desktop} />
 							<source media="(min-width: 768px)" srcSet={other.image.tablet} />
-							<img src={other.image.mobile} alt={other.name} />
+							<img src={other.image.mobile} alt={other.name} className='max-w-[500px] mx-auto' />
 						</picture>
 						<div>
 							<h3 className='mt-8 text-[1.5rem] tracking-[1.714px] mb-8'>
 								{other.name}
 							</h3>
-							<a href={other.to} className={`tracking-[1px] bg-reddish-orange ${(idx === 0 || idx === 1) ? 'mb-[36px]' : ''} 
+							<Link to={other.to!} className={`tracking-[1px] bg-reddish-orange hover:bg-reddish-hover ${(idx === 0 || idx === 1) ? 'mb-[36px]' : ''} 
 										inline-block px-[30px] py-[15px] text-white`}>
 								See Product
-							</a>
+							</Link>
 						</div>
 					</div>
 				))}

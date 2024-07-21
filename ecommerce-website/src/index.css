@@ -13,6 +13,12 @@ body {
     background-color: #FAFAFA;
 }
 
+img {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+}
+
 .footer-border::before {
     content: '';
     position: absolute;
@@ -30,4 +36,19 @@ body {
     top: 62px;
     right: 25px;
     width: 327px;
+}
+
+.social-icons:hover > path,
+.home-icon:hover > path  {
+    fill: #D87D4A;
+}
+
+.cart:hover > g > path {
+    fill: #FBAF85;
+}
+
+@media (min-width: 48em) {
+    .footer-border::before {
+        transform: translate(-350%);
+    }
 }

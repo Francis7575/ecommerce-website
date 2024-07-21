@@ -52,4 +52,23 @@ const Earphones: ProductItem[] = data
         new: 'NEW PRODUCT'
     }));
 
+export const BillingFields = [
+    { name: 'name', type: 'text', id: 'name', label: 'Name' },
+    { name: 'email', type: 'email', id: 'email', label: 'Email Address' },
+    { name: 'phoneNumber', type: 'number', id: 'phoneNumber', label: 'Phone Number' },
+]
+
+export const ShippingFields = [
+    { name: 'address', type: 'text', id: 'address', label: 'Your Address' },
+    { name: 'zipcode', type: 'number', id: 'zipcode', label: 'ZIP Code' },
+    { name: 'city', type: 'text', id: 'city', label: 'City' },
+    { name: 'country', type: 'text', id: 'country', label: 'Country' },
+]
+
+export const RadioFields = [
+    { name: 'eMoney', type: 'radio', id: 'eMoney', label: 'e-Money' },
+    { name: 'cashDelivery', type: 'radio', id: 'cash delivery', label: 'Cash on Delivery' },
+]
+
+
 export { Headphones, Speakers, Earphones, Menuitems }

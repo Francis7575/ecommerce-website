@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { Home, ProductCategory, ProductDetail } from './components'
+import { Home, ProductCategory, ProductDetail, CheckoutForm } from './components'
 
 const App = () => {
   return (
@@ -7,6 +7,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/:category" element={<ProductCategory />} />
       <Route path="/:category/:productId" element={<ProductDetail />} />
+      <Route path="/checkout" element={<CheckoutForm />} />
     </Routes>
   )
 }

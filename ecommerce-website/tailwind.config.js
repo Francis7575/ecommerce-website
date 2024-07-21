@@ -7,7 +7,9 @@ export default {
   theme: {
     extend: {
       screens: {
-        'lt': '500px' 
+        'lt': '500px',
+        '450': '450px',
+        '1110': '1110px'
       },
       colors: {
         'black': '#191919',
@@ -17,11 +19,14 @@ export default {
         'white-opc-49': 'rgba(255, 255, 255, 0.49)',
         'white-opc-75': 'rgba(255, 255, 255, 0.75)',
         'reddish-orange': '#D87D4A',
+        'reddish-hover': '#FBAF85',
         'lightgray': '#F1F1F1',
         'almost-white': '#FAFAFA',
         'second-lightgray': 'hsl(0,0%,86%)',
+        'dark-gray': '#4C4C4C',
         'white': '#FFF',
-        'red': '#D73C3C'
+        'red': '#D73C3C',
+        'third-lightgray': '#CFCFCF'
       },
       backgroundImage: {
         'new-product-mobile': 'url("/assets/home/mobile/image-header.jpg")',

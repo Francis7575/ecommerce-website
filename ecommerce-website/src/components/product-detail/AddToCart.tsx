@@ -2,7 +2,7 @@ import useStore from "../../store/useStore"
 import { AddToCartProps } from "../../types/types"
 
 const AddToCart = ({ productQuantity, increment, decrement, productId, productImage, productName,
-	productPrice, }: AddToCartProps) => {
+	productPrice, setTotalPriceState}: AddToCartProps) => {
 	const addToCart = useStore((state) => state.addToCart);
 	const resetProductQuantity = useStore((state) => state.resetProductQuantity);
 
@@ -15,23 +15,24 @@ const AddToCart = ({ productQuantity, increment, decrement, productId, productIm
 			price: productPrice,
 		});
 		resetProductQuantity();
+		setTotalPriceState();
 	};
 
 	return (
-		<div className='flex gap-4 items-center'>
-			<div className='flex gap-[1.25rem] items-center bg-lightgray p-[15px] font-bold w-[128px] justify-center text-[.813rem]'>
+		<div className='flex gap-4 items-center '>
+			<div className='flex gap-[1.25rem] items-center bg-lightgray p-[15px] font-bold w-[128px] justify-center text-[.813rem] lg:text-[1rem]'>
 				<button onClick={decrement}
-					className='opacity-70'>
+					className='opacity-70 text-second-black hover:text-reddish-orange hover:opacity-100'>
 					-
 				</button>
 				<span>{productQuantity}</span>
 				<button onClick={increment}
-					className='opacity-70'>
+					className='opacity-70 text-second-black hover:text-reddish-orange hover:opacity-100'>
 					+
 				</button>
 			</div>
 			<button onClick={handleAddToCart}
-				className='w-[160px] bg-reddish-orange text-white font-bold uppercase tracking-[1px] py-[15px] text-[.813rem]'>
+				className='w-[160px] bg-reddish-orange hover:bg-reddish-hover text-white font-bold uppercase tracking-[1px] py-[15px] text-[.813rem]'>
 				Add to cart
 			</button>
 		</div>

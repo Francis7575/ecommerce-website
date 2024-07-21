@@ -15,8 +15,8 @@ const Menu = () => {
 	}
 
 	return (
-		<menu className='z-50 lg:hidden pl-[1.75rem] md:pl-[40px]'>
-			<button onClick={handleToggleMenu} className=''>
+		<menu className='z-50 lg:hidden'>
+			<button onClick={handleToggleMenu} className='pl-[1.75rem] md:pl-[40px]'>
 				<img src={MenuIcon} alt="Menu" />
 			</button>
 			<div className={`bg-white px-[1.5rem] py-[35px] absolute top-[90px] w-full min-h-screen

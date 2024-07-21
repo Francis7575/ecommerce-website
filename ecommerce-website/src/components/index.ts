@@ -14,3 +14,4 @@ export { default as Recommended } from '../components/product-detail/Recommended
 export { default as InTheBox } from '../components/product-detail/InTheBox'
 export { default as Features } from '../components/product-detail/Features'
 export { default as ImageGallery } from '../components/product-detail/ImageGallery'
+export { default as CheckoutForm } from '../pages/checkout/CheckoutForm'
