@@ -1,5 +1,15 @@
 import { useParams, Link } from 'react-router-dom';
-import { AddToCart, Header, ShopItems, Features, InTheBox, ImageGallery, Recommended, Announcement, Footer } from '../components';
+import {
+	AddToCart,
+	Header,
+	ShopItems,
+	Features,
+	InTheBox,
+	ImageGallery,
+	Recommended,
+	Announcement,
+	Footer
+} from '../components';
 import { useEffect } from 'react';
 import data from '../data.json';
 import useStore from '../store/useStore';
@@ -14,15 +24,32 @@ const ProductDetail = () => {
 	const setTotalPrice = useStore((state) => state.setTotalPrice);
 	const product = data.find(item => item.category === category && item.id === parseInt(productId!));
 	const [totalPriceState, setTotalPriceState] = useState<number>(product!.price)
+	const [productQuantityLocal, setProductQuantityLocal] = useState<number>(1)
+
 
 	if (!product) {
 		return <div>Product not found</div>;
 	}
 
 	const basePrice = Number(product.price);
+
 	const handleTotalPrice = () => {
-		setTotalPriceState(productQuantity * basePrice);
+		setTotalPriceState(productQuantityLocal * basePrice);
 		setTotalPrice(Number(basePrice));
+	}
+
+	const incrementing = () => {
+		increment(basePrice)
+		setTotalPriceState(productQuantityLocal * basePrice);
+		setProductQuantityLocal((prev)=>(prev + 1))
+	}
+
+	const decrementing = () => {
+		decrement(basePrice)
+		setTotalPriceState(productQuantityLocal * basePrice)
+		if (productQuantityLocal >= 2) {
+			setProductQuantityLocal((prev)=>(prev - 1 ))
+		}
 	}
 
 	useEffect(() => {
@@ -30,6 +57,7 @@ const ProductDetail = () => {
 			handleTotalPrice()
 		}
 	}, [product, setTotalPrice]);
+
 
 	return (
 		<>
@@ -60,13 +88,13 @@ const ProductDetail = () => {
 						</p>
 						<p className='flex gap-2 mb-8 text-[1.15rem] font-bold text-second-black tracking-[1.286px] uppercase'>
 							<span>$</span>
-							<span>{totalPrice.toLocaleString()}</span>
+							<span>{(basePrice * productQuantityLocal).toLocaleString()}</span>
 						</p>
 						<AddToCart
 							productId={parseInt(productId!)}
-							productQuantity={productQuantity}
-							increment={() => increment(totalPriceState, totalPrice)}
-							decrement={() => decrement(totalPriceState, totalPrice)}
+							productQuantityLocal={productQuantityLocal}
+							increment={incrementing}
+							decrement={decrementing}
 							productImage={product.cart.image}
 							productName={product.name}
 							productPrice={totalPriceState}

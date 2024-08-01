@@ -15,6 +15,7 @@ export type Product = {
     name: string
     price: number
     quantity?: number
+    productQuantity: number
     cart?: {
         image: string
     }
@@ -27,14 +28,14 @@ export type CartState = {
     addToCart: (item: Product) => void
     removeItemById: (item: number) => void
     clearCart: () => void
-    increment: (totalPriceState: number, totalPrice: number) => void
-    decrement: (totalPriceState: number, totalPrice: number) => void
+    increment: (totalPriceState: number) => void
+    decrement: (totalPriceState: number) => void
     setTotalPrice: (basePrice: number) => void;
     resetProductQuantity: () => void
 }
 
 export type AddToCartProps = {
-    productQuantity: number
+    productQuantityLocal: number
     increment: () => void
     decrement: () => void
     productId: number
@@ -66,5 +67,5 @@ export type FormData = {
     country: string,
     paymentDetails: "eMoney" | "cashDelivery" | null
     eMoneyNumber: string,
-	eMoneyPin: string,
+    eMoneyPin: string,
 }

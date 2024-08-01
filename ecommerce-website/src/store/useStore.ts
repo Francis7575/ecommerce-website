@@ -25,6 +25,7 @@ const useStore = create<CartState>((set) => ({
     clearCart: () => set({ cartItems: [] }),
     increment: (basePrice: number) => set((state) => {
         const newQuantity = state.productQuantity + 1;
+        console.log(newQuantity)
         return { productQuantity: newQuantity, totalPrice: newQuantity * basePrice };
     }),
     decrement: (basePrice: number) => set((state) => {

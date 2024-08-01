@@ -1,15 +1,14 @@
 import useStore from "../../store/useStore"
 import { AddToCartProps } from "../../types/types"
 
-const AddToCart = ({ productQuantity, increment, decrement, productId, productImage, productName,
-	productPrice, setTotalPriceState}: AddToCartProps) => {
+const AddToCart = ({ increment, decrement, productId, productImage, productName,
+	productPrice, setTotalPriceState, productQuantityLocal }: AddToCartProps) => {
 	const addToCart = useStore((state) => state.addToCart);
 	const resetProductQuantity = useStore((state) => state.resetProductQuantity);
-
 	const handleAddToCart = () => {
 		addToCart({
 			id: productId,
-			quantity: productQuantity,
+			productQuantity: productQuantityLocal,
 			cart: { image: productImage },
 			name: productName,
 			price: productPrice,
@@ -25,7 +24,7 @@ const AddToCart = ({ productQuantity, increment, decrement, productId, productIm
 					className='opacity-70 text-second-black hover:text-reddish-orange hover:opacity-100'>
 					-
 				</button>
-				<span>{productQuantity}</span>
+				<span>{productQuantityLocal}</span>
 				<button onClick={increment}
 					className='opacity-70 text-second-black hover:text-reddish-orange hover:opacity-100'>
 					+

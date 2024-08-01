@@ -66,10 +66,10 @@ const Cart = () => {
 									</div>
 								</div>
 								<div className='bg-lightgray font-bold w-full max-w-[96px] px-[11px] py-[7px] flex justify-between'>
-									<button onClick={() => decrement(item.price, totalPrice)}
+									<button onClick={() => decrement(totalPrice)}
 										className='opacity-50'>-</button>
-									<span>{item.quantity}</span>
-									<button onClick={() => increment(item.price, totalPrice)}
+									<span>{productQuantity}</span>
+									<button onClick={() => increment(totalPrice)}
 										className='opacity-50'>+</button>
 								</div>
 							</div>
