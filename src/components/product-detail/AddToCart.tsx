@@ -2,18 +2,18 @@ import useStore from "../../store/useStore"
 import { AddToCartProps } from "../../types/types"
 
 const AddToCart = ({ increment, decrement, productId, productImage, productName,
-	productPrice, setTotalPriceState, productQuantityLocal }: AddToCartProps) => {
+	productPrice, setTotalPriceState, productQuantityLocal, resetDetail }: AddToCartProps) => {
 	const addToCart = useStore((state) => state.addToCart);
-	const resetProductQuantity = useStore((state) => state.resetProductQuantity);
+
 	const handleAddToCart = () => {
 		addToCart({
 			id: productId,
 			productQuantity: productQuantityLocal,
-			cart: { image: productImage },
+			image: productImage,
 			name: productName,
 			price: productPrice,
 		});
-		resetProductQuantity();
+		resetDetail()
 		setTotalPriceState();
 	};
 

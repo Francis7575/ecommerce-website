@@ -10,7 +10,6 @@ import {
 	Announcement,
 	Footer
 } from '../components';
-import { useEffect } from 'react';
 import data from '../data.json';
 import useStore from '../store/useStore';
 import { useState } from 'react';
@@ -26,17 +25,11 @@ const ProductDetail = () => {
 	const [totalPriceState, setTotalPriceState] = useState<number>(product!.price)
 	const [productQuantityLocal, setProductQuantityLocal] = useState<number>(1)
 
-
 	if (!product) {
 		return <div>Product not found</div>;
 	}
 
 	const basePrice = Number(product.price);
-
-	const handleTotalPrice = () => {
-		setTotalPriceState(productQuantityLocal * basePrice);
-		setTotalPrice(Number(basePrice));
-	}
 
 	const incrementing = () => {
 		increment(basePrice)
@@ -52,12 +45,10 @@ const ProductDetail = () => {
 		}
 	}
 
-	useEffect(() => {
-		if (product) {
-			handleTotalPrice()
-		}
-	}, [product, setTotalPrice]);
-
+	const resetDetail = () => {
+		setProductQuantityLocal(1)
+		setTotalPriceState(basePrice)
+	}
 
 	return (
 		<>
@@ -97,8 +88,9 @@ const ProductDetail = () => {
 							decrement={decrementing}
 							productImage={product.cart.image}
 							productName={product.name}
-							productPrice={totalPriceState}
+							productPrice={totalPrice}
 							setTotalPriceState={() => setTotalPriceState(basePrice)}
+							resetDetail={resetDetail}
 						/>
 					</div>
 				</div>

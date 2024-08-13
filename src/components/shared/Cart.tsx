@@ -48,10 +48,10 @@ const Cart = () => {
 							</button>
 							<div className='flex items-center flex-1'>
 								<div className='flex items-center gap-4'>
-									{item.cart && (
+									{item && (
 										<img
 											className='max-w-[64px]'
-											src={item.cart.image}
+											src={item.image}
 											alt={item.name}
 										/>
 									)}
@@ -66,10 +66,10 @@ const Cart = () => {
 									</div>
 								</div>
 								<div className='bg-lightgray font-bold w-full max-w-[96px] px-[11px] py-[7px] flex justify-between'>
-									<button onClick={() => decrement(totalPrice)}
+									<button onClick={() => decrement(item.price)}
 										className='opacity-50'>-</button>
 									<span>{productQuantity}</span>
-									<button onClick={() => increment(totalPrice)}
+									<button onClick={() => increment(item.price)}
 										className='opacity-50'>+</button>
 								</div>
 							</div>

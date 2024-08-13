@@ -33,7 +33,6 @@ const useStore = create<CartState>((set) => ({
         return { productQuantity: newQuantity, totalPrice: newQuantity * basePrice };
     }),
     setTotalPrice: (basePrice: number) => set((state) => ({ totalPrice: state.productQuantity * basePrice })),
-    resetProductQuantity: () => set({ productQuantity: 1 }),
 }));
 
 export default useStore;

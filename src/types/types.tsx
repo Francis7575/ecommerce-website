@@ -16,9 +16,7 @@ export type Product = {
     price: number
     quantity?: number
     productQuantity: number
-    cart?: {
-        image: string
-    }
+    image: string
 }
 
 export type CartState = {
@@ -31,7 +29,6 @@ export type CartState = {
     increment: (totalPriceState: number) => void
     decrement: (totalPriceState: number) => void
     setTotalPrice: (basePrice: number) => void;
-    resetProductQuantity: () => void
 }
 
 export type AddToCartProps = {
@@ -43,6 +40,7 @@ export type AddToCartProps = {
     productName: string
     productPrice: number
     setTotalPriceState: () => void
+    resetDetail: () => void
 }
 
 export type NewProductProps = {
