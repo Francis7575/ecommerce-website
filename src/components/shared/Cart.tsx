@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import useStore from "../../store/useStore"
 import { Link } from 'react-router-dom';
+import EmptyCartImage from "/assets/cart/cart-empty.png"
 
 const Cart = () => {
 	const [isCartOpened, setIsCartOpened] = useState<boolean>(false);
@@ -29,16 +30,23 @@ const Cart = () => {
 			</button>
 			<section className={`bg-white cart-container rounded-[8px] py-[2rem] z-50 px-[1.75rem] lg:px-[2rem]
 				${isCartOpened ? '' : 'hidden'}`}>
-				<div className='flex justify-between items-center mb-6'>
-					<p className='font-bold'>
-						<span>CART</span>
-						<span>({productQuantity})</span>
-					</p>
-					<button className='underline opacity-50'
-						onClick={() => useStore.getState().clearCart()}>
-						Remove All
-					</button>
+				{cartItems.length === 0 && (
+				<div>
+					<img src={EmptyCartImage} alt="Your Cart is currently empty" />
 				</div>
+				)}
+				{cartItems.length > 0 && (
+					<div className='flex justify-between items-center mb-6'>
+						<p className='font-bold'>
+							<span>CART</span>
+							<span>({productQuantity})</span>
+						</p>
+						<button className='underline opacity-50'
+							onClick={() => useStore.getState().clearCart()}>
+							Remove All
+						</button>
+					</div>
+				)}
 				<ul>
 					{cartItems.map((item) => (
 						<li key={item.id} className='mb-6 flex relative'>
