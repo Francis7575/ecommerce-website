@@ -18,14 +18,18 @@ const useStore = create<CartState>((set) => ({
             cartItems: updatedCartItems,
             totalPrice: item.price,
         };
+    }), 
+    removeItemById: (id: number) => set((state) => {
+        const updatedCartItems = state.cartItems.filter((cartItem) => cartItem.id !== id);
+        return {
+            cartItems: updatedCartItems,
+            productQuantity: 1,  // Reset product quantity
+            totalPrice: updatedCartItems.reduce((total, item) => total + item.price * item.quantity!, 0), //  is recalculated based on the remaining items in the cart.
+        };
     }),
-    removeItemById: (id: number) => set((state) => ({
-        cartItems: state.cartItems.filter((cartItem) => cartItem.id !== id),
-    })),
-    clearCart: () => set({ cartItems: [] }),
+    clearCart: () => set({cartItems: [], productQuantity: 1, totalPrice: 0}),
     increment: (basePrice: number) => set((state) => {
         const newQuantity = state.productQuantity + 1;
-        console.log(newQuantity)
         return { productQuantity: newQuantity, totalPrice: newQuantity * basePrice };
     }),
     decrement: (basePrice: number) => set((state) => {

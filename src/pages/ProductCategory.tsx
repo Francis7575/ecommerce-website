@@ -14,7 +14,7 @@ const ProductCategory = () => {
             items = Headphones
             title = 'Headphones'
             break
-        case 'speakers':
+        case 'speakers':    
             items = Speakers
             title = 'Speakers'
             break

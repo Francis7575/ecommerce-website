@@ -16,11 +16,8 @@ import { useState } from 'react';
 
 const ProductDetail = () => {
 	const { category, productId } = useParams();
-	const productQuantity = useStore((state) => state.productQuantity);
 	const increment = useStore((state) => state.increment);
 	const decrement = useStore((state) => state.decrement);
-	const totalPrice = useStore((state) => state.totalPrice);
-	const setTotalPrice = useStore((state) => state.setTotalPrice);
 	const product = data.find(item => item.category === category && item.id === parseInt(productId!));
 	const [totalPriceState, setTotalPriceState] = useState<number>(product!.price)
 	const [productQuantityLocal, setProductQuantityLocal] = useState<number>(1)
@@ -45,10 +42,14 @@ const ProductDetail = () => {
 		}
 	}
 
+	// Resets productQuantity and price in the page
 	const resetDetail = () => {
 		setProductQuantityLocal(1)
 		setTotalPriceState(basePrice)
+		console.log(totalPriceState)
 	}
+
+	const priceByProductQuantity = basePrice * productQuantityLocal;
 
 	return (
 		<>
@@ -79,7 +80,7 @@ const ProductDetail = () => {
 						</p>
 						<p className='flex gap-2 mb-8 text-[1.15rem] font-bold text-second-black tracking-[1.286px] uppercase'>
 							<span>$</span>
-							<span>{(basePrice * productQuantityLocal).toLocaleString()}</span>
+							<span>{(priceByProductQuantity).toLocaleString()}</span>
 						</p>
 						<AddToCart
 							productId={parseInt(productId!)}
@@ -88,7 +89,7 @@ const ProductDetail = () => {
 							decrement={decrementing}
 							productImage={product.cart.image}
 							productName={product.name}
-							productPrice={totalPrice}
+							productPrice={priceByProductQuantity}
 							setTotalPriceState={() => setTotalPriceState(basePrice)}
 							resetDetail={resetDetail}
 						/>

@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import useStore from "../../store/useStore"
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom'
 import EmptyCartImage from "/assets/cart/cart-empty.png"
 
 const Cart = () => {
@@ -10,6 +10,8 @@ const Cart = () => {
 	const totalPrice = useStore((state) => state.totalPrice);
 	const increment = useStore((state) => state.increment);
 	const decrement = useStore((state) => state.decrement);
+	const cartRef = useRef<HTMLDivElement>(null);
+	const { category, productId } = useParams();
 
 	const handleToggleCart = () => {
 		setIsCartOpened(!isCartOpened)
@@ -18,6 +20,26 @@ const Cart = () => {
 	const LimitCharacters = (name: string) => {
 		return name.length > 8 ? `${name.slice(0, 12)}` : name;
 	};
+
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
+				const cartButton = document.querySelector('.cart');
+				if (cartButton && cartButton.contains(event.target as Node)) {
+						return; // If the click is on the cart button, do nothing
+				}
+				setIsCartOpened(false);
+		}
+		};
+
+		if (isCartOpened) {
+			document.addEventListener('mousedown', handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isCartOpened])
 
 	return (
 		<div className='pr-[1.75rem] md:pr-[40px] relative lg:pr-[3rem] 1110:pr-0'>
@@ -28,12 +50,13 @@ const Cart = () => {
 					</g>
 				</svg>
 			</button>
-			<section className={`bg-white cart-container rounded-[8px] py-[2rem] z-50 px-[1.75rem] lg:px-[2rem]
-				${isCartOpened ? '' : 'hidden'}`}>
+			<section ref={cartRef}
+				className={`bg-white cart-container rounded-[8px] py-[2rem] z-50 px-[1.75rem] lg:px-[2rem]
+					${isCartOpened ? '' : 'hidden'}`}>
 				{cartItems.length === 0 && (
-				<div>
-					<img src={EmptyCartImage} alt="Your Cart is currently empty" />
-				</div>
+					<div>
+						<img src={EmptyCartImage} alt="Your Cart is currently empty" />
+					</div>
 				)}
 				{cartItems.length > 0 && (
 					<div className='flex justify-between items-center mb-6'>
@@ -49,55 +72,55 @@ const Cart = () => {
 				)}
 				<ul>
 					{cartItems.map((item) => (
-						<li key={item.id} className='mb-6 flex relative'>
-							<button className='self-start absolute inset-0'
-								onClick={() => useStore.getState().removeItemById(item.id)}>
-								<svg className="w-[16px]" fill="#FA5252" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M10.053,7.988l5.631,8.024h-1.497L8.566,7.988H10.053z M21,7v10	c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4V7c0-2.209,1.791-4,4-4h10C19.209,3,21,4.791,21,7z M17.538,17l-4.186-5.99L16.774,7	h-1.311l-2.704,3.16L10.552,7H6.702l3.941,5.633L6.906,17h1.333l3.001-3.516L13.698,17H17.538z" /></svg>
-							</button>
-							<div className='flex items-center flex-1'>
-								<div className='flex items-center gap-4'>
-									{item && (
-										<img
-											className='max-w-[64px]'
-											src={item.image}
-											alt={item.name}
-										/>
-									)}
-									<div className='mr-[20px]'>
-										<p className='text-[.935rem] font-bold leading-[25px]'>
-											{LimitCharacters(item.name)}
-										</p>
-										<p className='text-[.875rem] opacity-50 font-bold flex gap-1 items-center'>
-											<span>$</span>
-											<span>{totalPrice.toLocaleString()}</span>
-										</p>
+						<React.Fragment key={item.id}>
+							<li className='mb-6 flex relative'>
+								<button className='self-start absolute inset-0'
+									onClick={() => useStore.getState().removeItemById(item.id)}>
+									<svg className="w-[16px]" fill="#FA5252" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M10.053,7.988l5.631,8.024h-1.497L8.566,7.988H10.053z M21,7v10	c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4V7c0-2.209,1.791-4,4-4h10C19.209,3,21,4.791,21,7z M17.538,17l-4.186-5.99L16.774,7	h-1.311l-2.704,3.16L10.552,7H6.702l3.941,5.633L6.906,17h1.333l3.001-3.516L13.698,17H17.538z" /></svg>
+								</button>
+								<div className='flex items-center flex-1'>
+									<div className='flex items-center gap-4'>
+										{item && (
+											<img
+												className='max-w-[64px]'
+												src={item.image}
+												alt={item.name}
+											/>
+										)}
+										<div className='mr-[20px]'>
+											<p className='text-[.935rem] font-bold leading-[25px]'>
+												{LimitCharacters(item.name)}
+											</p>
+											<p className='text-[.875rem] opacity-50 font-bold flex gap-1 items-center'>
+												<span>$</span>
+												<span>{totalPrice.toLocaleString()}</span>
+											</p>
+										</div>
+									</div>
+									<div className='bg-lightgray font-bold w-full max-w-[96px] px-[11px] py-[7px] flex justify-between'>
+										<button onClick={() => decrement(item.price)}
+											className='opacity-50'>-</button>
+										<span>{productQuantity}</span>
+										<button onClick={() => increment(item.price)}
+											className='opacity-50'>+</button>
 									</div>
 								</div>
-								<div className='bg-lightgray font-bold w-full max-w-[96px] px-[11px] py-[7px] flex justify-between'>
-									<button onClick={() => decrement(item.price)}
-										className='opacity-50'>-</button>
-									<span>{productQuantity}</span>
-									<button onClick={() => increment(item.price)}
-										className='opacity-50'>+</button>
+							</li>
+							<div className='mt-6 '>
+								<div className='flex justify-between'>
+									<p className='uppercase opacity-70 text-[.93rem]'>
+										Total
+									</p>
+									<p className='font-bold'>${totalPrice.toLocaleString()}</p>
 								</div>
+								<Link to={`/${category}/${productId}/checkout`}
+									className='mt-4 inline-block text-center px-4 py-2 bg-reddish-orange w-full text-white rounded hover:bg-reddish-hover'>
+									Checkout
+								</Link>
 							</div>
-						</li>
+						</React.Fragment>
 					))}
 				</ul>
-				{cartItems.length > 0 && (
-					<div className='mt-6 '>
-						<div className='flex justify-between'>
-							<p className='uppercase opacity-70 text-[.93rem]'>
-								Total
-							</p>
-							<p className='font-bold'>${totalPrice.toLocaleString()}</p>
-						</div>
-						<Link to="/checkout"
-							className='mt-4 inline-block text-center px-4 py-2 bg-reddish-orange w-full text-white rounded hover:bg-reddish-hover'>
-							Checkout
-						</Link>
-					</div>
-				)}
 			</section>
 		</div>
 	)
