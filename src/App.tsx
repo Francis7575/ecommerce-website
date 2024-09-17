@@ -19,3 +19,9 @@ export const PageRouter = () => {
     </Suspense>
   );
 };
+
+const App = () => {
+  return <PageRouter />;
+};
+
+export default App;
