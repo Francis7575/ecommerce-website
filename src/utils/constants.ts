@@ -10,7 +10,7 @@ const Menuitems = [
     { image: EarphonesImage, alt: 'Earphones', name: 'Earphones', about: 'Shop', to: '/earphones' },
 ]
 
-const Headphones: ProductItem[] = data
+const Headphones: ProductItem[] = data  
     .filter((item: any) => item.category === 'headphones')
     .map((item: any) => ({
         id: item.id,

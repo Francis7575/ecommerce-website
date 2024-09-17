@@ -72,7 +72,7 @@ export type FormData = {
 
 export interface IRouterType {
   title: string;
-  path: string;
+  path?: string;
   element: JSX.Element;
   children?: IRouterType[];
 }
