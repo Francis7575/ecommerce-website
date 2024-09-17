@@ -1,4 +1,4 @@
-import { Header, NewProduct, ShopItems, ViewProduct, Announcement, Footer } from '../components';
+import { NewProduct, ShopItems, ViewProduct, Announcement } from '../components';
 import { Headphones, Speakers, Earphones } from '../utils/constants';
 
 const Home = () => {

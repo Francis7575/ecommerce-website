@@ -1,4 +1,3 @@
-import { Header, Footer } from "../../components"
 import { useParams, Link } from 'react-router-dom';
 import { useState, ChangeEvent, FormEvent } from "react"
 import { FormData } from "../../types/types";

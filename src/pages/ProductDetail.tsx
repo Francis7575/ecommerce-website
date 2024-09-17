@@ -1,14 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
 import {
 	AddToCart,
-	Header,
 	ShopItems,
 	Features,
 	InTheBox,
 	ImageGallery,
 	Recommended,
 	Announcement,
-	Footer
 } from '../components';
 import data from '../data.json';
 import useStore from '../store/useStore';

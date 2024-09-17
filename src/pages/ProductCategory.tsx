@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { Header, ShopItems, Announcement, Footer } from '../components'
+import { ShopItems, Announcement } from '../components'
 import { Headphones, Speakers, Earphones } from "../utils/constants"
 import { Link } from "react-router-dom"
 

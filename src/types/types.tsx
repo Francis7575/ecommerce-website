@@ -70,10 +70,9 @@ export type FormData = {
 	eMoneyPin: string,
 }
 
-export type IRouterType = {
-	title: string;
-	path: string;
-	element: ReactElement;
-	children?: IRouterType[];
-	layout?: boolean
+export interface IRouterType {
+  title: string;
+  path: string;
+  element: JSX.Element;
+  children?: IRouterType[];
 }
