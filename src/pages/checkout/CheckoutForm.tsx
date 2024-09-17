@@ -43,7 +43,7 @@ const CheckoutForm = () => {
 
 	return (
 		<>
-			<Header />
+
 			<div className="pt-4 pl-[1.5rem] mb-[1.5rem]">
 				<Link to={`/${category}/${productId}`}
 					className='text-second-black opacity-50 text-[.935rem] leading-[25px]'>
@@ -147,7 +147,6 @@ const CheckoutForm = () => {
 					</section>
 				</div>
 			</form>
-			<Footer />
 		</>
 	)
 }

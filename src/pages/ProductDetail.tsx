@@ -31,14 +31,14 @@ const ProductDetail = () => {
 	const incrementing = () => {
 		increment(basePrice)
 		setTotalPriceState(productQuantityLocal * basePrice);
-		setProductQuantityLocal((prev)=>(prev + 1))
+		setProductQuantityLocal((prev) => (prev + 1))
 	}
 
 	const decrementing = () => {
 		decrement(basePrice)
 		setTotalPriceState(productQuantityLocal * basePrice)
 		if (productQuantityLocal >= 2) {
-			setProductQuantityLocal((prev)=>(prev - 1 ))
+			setProductQuantityLocal((prev) => (prev - 1))
 		}
 	}
 
@@ -53,7 +53,6 @@ const ProductDetail = () => {
 
 	return (
 		<>
-			<Header />
 			<div className='px-[1.5rem] lt:px-[2.5rem] max-w-[1110px] mx-auto 1110:px-0'>
 				<div className='mt-4 mb-[1.5rem]'>
 					<Link to={`/${category}`} className='text-second-black opacity-50 text-[.935rem] leading-[25px]'>
@@ -104,7 +103,6 @@ const ProductDetail = () => {
 			</div>
 			<ShopItems padding="0" />
 			<Announcement />
-			<Footer />
 		</>
 	);
 };

@@ -14,7 +14,7 @@ const ProductCategory = () => {
             items = Headphones
             title = 'Headphones'
             break
-        case 'speakers':    
+        case 'speakers':
             items = Speakers
             title = 'Speakers'
             break
@@ -28,7 +28,6 @@ const ProductCategory = () => {
 
     return (
         <>
-            <Header />
             <div className="bg-second-black py-[2rem] text-center">
                 <h2 className="uppercase tracking-[2px] font-bold text-[1.75rem] md:text-[2.5rem] text-white">{title}</h2>
             </div>
@@ -47,7 +46,7 @@ const ProductCategory = () => {
                                     {item.new}
                                 </h3>
                                 <div className='flex flex-col items-center lg:items-start gap-[1.5rem] mt-8'>
-                                    <h4 className={`text-second-black font-bold uppercase tracking-[1px] max-w-[387px] font-bold text-[1.75rem] md:text-[2.5rem] `}>
+                                    <h4 className={`text-second-black uppercase tracking-[1px] max-w-[387px] font-bold text-[1.75rem] md:text-[2.5rem] `}>
                                         {item.name}
                                     </h4>
                                     <p className="text-[.935rem] leading-[25px] opacity-50 text-second-black md:mb-[1.5rem] max-w-[572px] lg:max-w-[445px]">
@@ -64,7 +63,6 @@ const ProductCategory = () => {
             </div>
             <ShopItems padding="pb-0" />
             <Announcement />
-            <Footer />
         </>
     )
 }

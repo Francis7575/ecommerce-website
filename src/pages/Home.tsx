@@ -9,7 +9,6 @@ const Home = () => {
 
     return (
         <>
-            <Header />
             {newProductItem && (
                 <NewProduct
                     new={newProductItem.new}
@@ -26,7 +25,6 @@ const Home = () => {
                 />
             )}
             <Announcement />
-            <Footer />
         </>
     )
 }

@@ -40,6 +40,3 @@ const useStore = create<CartState>((set) => ({
 }));
 
 export default useStore;
-
-
-
