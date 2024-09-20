@@ -118,6 +118,11 @@ const useStore = create<CartState>((set) => ({
           (total, cartItem) => total + cartItem.productQuantity!,
           0
         ),
+        totalPrice: updatedCartItems.reduce(
+          (total, cartItem) =>
+            total + cartItem.price * cartItem.productQuantity!,
+          0
+        ),
       };
     }),
   decrement: (id: number) =>
