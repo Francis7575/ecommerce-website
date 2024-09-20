@@ -12,7 +12,7 @@ const Cart = () => {
 	const [deletionType, setDeletionType] = useState<'single' | 'all'>('all');
 	const cartItems = useStore((state) => state.cartItems);
 	const totalItems = useStore((state) => state.totalItems);
-	const itemPrice = useStore((state) => state.itemPrice);
+	const totalPrice = useStore((state) => state.totalPrice);
 	const increment = useStore((state) => state.increment);
 	const decrement = useStore((state) => state.decrement);
 	const clearCart = useStore((state) => state.clearCart);
@@ -56,7 +56,6 @@ const Cart = () => {
 	};
 
 	const openDeleteModal = () => {
-		console.log('Remove All button clicked')
 		setDeletionType('all');
 		setIsModalOpen(true);
 	};
@@ -125,7 +124,7 @@ const Cart = () => {
 										</p>
 										<p className='text-[.875rem] opacity-50 font-bold flex gap-1 items-center'>
 											<span>$</span>
-											<span>{itemPrice.toLocaleString()}</span>
+											<span>{(item.price * item.productQuantity).toLocaleString()}</span>
 										</p>
 									</div>
 								</div>
@@ -145,7 +144,7 @@ const Cart = () => {
 								<p className='uppercase opacity-70 text-[.93rem]'>
 									Total
 								</p>
-								<p className='font-bold'>$</p>
+								<p className='font-bold'>${totalPrice.toLocaleString()}</p>
 							</div>
 							<Link to={`/${category}/${productId}/checkout`}
 								className='mt-4 inline-block text-center px-4 py-2 bg-reddish-orange w-full text-white rounded hover:bg-reddish-hover'>

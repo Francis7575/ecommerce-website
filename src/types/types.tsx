@@ -24,14 +24,13 @@ export type Product = {
 export type CartState = {
 	cartItems: Product[]
 	productQuantity: number
-	itemPrice: number;
 	totalItems: number;
+	totalPrice: number;
 	addToCart: (item: Product) => { itemAdded: boolean; itemUpdated: boolean };
 	removeItemById: (item: number) => void
 	clearCart: () => void
   increment: (id: number) => void;
   decrement: (id: number) => void;
-	setTotalPrice: (basePrice: number) => void;
 }
 
 export type AddToCartProps = {

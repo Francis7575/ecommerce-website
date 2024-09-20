@@ -4,26 +4,29 @@ import { CartState } from "../types/types";
 const useStore = create<CartState>((set) => ({
   cartItems: [],
   productQuantity: 1,
-  itemPrice: 0,
   totalItems: 0,
+  totalPrice: 0,
   addToCart: (item) => {
     let itemAdded = false;
     let itemUpdated = false;
 
-    const updatedState = set((state) => {
+    set((state) => {
       const existingItem = state.cartItems.find(
         (cartItem) => cartItem.id === item.id
       );
 
       if (existingItem) {
-        // Update quantity and total price if the item exists
+        // Update quantity and price if the item exists
         const updatedCartItems = state.cartItems.map((cartItem) => {
           if (cartItem.id === item.id) {
             itemUpdated = true; // Mark as updated
+            const newQuantity =
+              cartItem.productQuantity! + item.productQuantity!;
+            const newItemPrice = newQuantity * item.price;
             return {
               ...cartItem,
-              productQuantity:
-                cartItem.productQuantity! + item.productQuantity!,
+              productQuantity: newQuantity,
+              itemPrice: newItemPrice, // Update the individual item price
             };
           }
           return cartItem;
@@ -31,35 +34,40 @@ const useStore = create<CartState>((set) => ({
 
         return {
           cartItems: updatedCartItems,
-          itemPrice: state.itemPrice + item.price * item.productQuantity!,
           totalItems: updatedCartItems.reduce(
             (total, cartItem) => total + cartItem.productQuantity!,
+            0
+          ),
+          totalPrice: updatedCartItems.reduce(
+            (total, cartItem) =>
+              total + cartItem.price * cartItem.productQuantity!,
             0
           ),
         };
       } else if (item.productQuantity > 0) {
         // Add new item to the cart
         itemAdded = true; // Mark as newly added
-        const updatedCartItems = [...state.cartItems, item];
+        const newItem = {
+          ...item,
+          itemPrice: item.productQuantity! * item.price, // Calculate the price for the new item
+        };
+        const updatedCartItems = [...state.cartItems, newItem];
 
         return {
           cartItems: updatedCartItems,
-          itemPrice: state.itemPrice + item.price * item.productQuantity!,
           totalItems: updatedCartItems.reduce(
             (total, cartItem) => total + cartItem.productQuantity!,
             0
           ),
+          totalPrice: updatedCartItems.reduce(
+            (total, cartItem) =>
+              total + cartItem.price * cartItem.productQuantity!,
+            0
+          ),
         };
       }
-
-      // If neither case was true, return the original state without changes
-      return {
-        cartItems: state.cartItems,
-        itemPrice: state.itemPrice,
-        totalItems: state.totalItems,
-      };
+      return state;
     });
-
     return { itemAdded, itemUpdated };
   },
 
@@ -79,10 +87,14 @@ const useStore = create<CartState>((set) => ({
           (total, cartItem) => total + cartItem.productQuantity!,
           0
         ), // Recalculate total items
+        totalPrice: updatedCartItems.reduce(
+          (total, cartItem) => total + cartItem.price * cartItem.productQuantity!,
+          0
+        ),
       };
     }),
-  clearCart: () => set({ cartItems: [], productQuantity: 1, itemPrice: 0 }),
-	increment: (id: number) =>
+  clearCart: () => set({ cartItems: [], productQuantity: 1, totalPrice: 0  }),
+  increment: (id: number) =>
     set((state) => {
       const updatedCartItems = state.cartItems.map((cartItem) => {
         if (cartItem.id === id) {
@@ -98,7 +110,8 @@ const useStore = create<CartState>((set) => ({
       return {
         cartItems: updatedCartItems,
         itemPrice: updatedCartItems.reduce(
-          (total, cartItem) => total + cartItem.price * cartItem.productQuantity!,
+          (total, cartItem) =>
+            total + cartItem.price * cartItem.productQuantity!,
           0
         ),
         totalItems: updatedCartItems.reduce(
@@ -107,11 +120,12 @@ const useStore = create<CartState>((set) => ({
         ),
       };
     }),
-   decrement: (id: number) =>
+  decrement: (id: number) =>
     set((state) => {
       const updatedCartItems = state.cartItems.map((cartItem) => {
         if (cartItem.id === id) {
-          const newQuantity = cartItem.productQuantity! > 1 ? cartItem.productQuantity! - 1 : 1;
+          const newQuantity =
+            cartItem.productQuantity! > 1 ? cartItem.productQuantity! - 1 : 1;
           return {
             ...cartItem,
             productQuantity: newQuantity,
@@ -123,17 +137,21 @@ const useStore = create<CartState>((set) => ({
       return {
         cartItems: updatedCartItems,
         itemPrice: updatedCartItems.reduce(
-          (total, cartItem) => total + cartItem.price * cartItem.productQuantity!,
+          (total, cartItem) =>
+            total + cartItem.price * cartItem.productQuantity!,
           0
         ),
         totalItems: updatedCartItems.reduce(
           (total, cartItem) => total + cartItem.productQuantity!,
           0
         ),
+        totalPrice: updatedCartItems.reduce(
+          (total, cartItem) =>
+            total + cartItem.price * cartItem.productQuantity!,
+          0
+        ),
       };
     }),
-  setTotalPrice: (basePrice: number) =>
-    set((state) => ({ itemPrice: state.productQuantity * basePrice })),
 }));
 
 export default useStore;
