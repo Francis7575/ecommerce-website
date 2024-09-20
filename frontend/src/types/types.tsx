@@ -1,5 +1,3 @@
-import { ReactElement } from 'react';
-
 export type ProductItem = {
 	id: number
 	mobile: string
