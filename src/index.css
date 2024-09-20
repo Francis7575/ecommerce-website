@@ -3,52 +3,52 @@
 @tailwind utilities;
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Manrope", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Manrope", sans-serif;
 }
 
 body {
-    background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 img {
-    display: block;
-    max-width: 100%;
-    width: 100%;
+  display: block;
+  max-width: 100%;
+  width: 100%;
 }
 
 .footer-border::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 101px;
-    height: 4px;
-    background-color: #D87D4A;
-    z-index: 10;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 101px;
+  height: 4px;
+  background-color: #d87d4a;
+  z-index: 10;
 }
 
 .cart-container {
-    position: absolute;
-    top: 62px;
-    right: 25px;
-    width: 327px;
+  position: absolute;
+  top: 62px;
+  right: 25px;
+  width: 327px;
 }
 
 .social-icons:hover > path,
-.home-icon:hover > path  {
-    fill: #D87D4A;
+.home-icon:hover > path {
+  fill: #d87d4a;
 }
 
 .cart:hover > g > path {
-    fill: #FBAF85;
+  fill: #fbaf85;
 }
 
 @media (min-width: 48em) {
-    .footer-border::before {
-        transform: translate(-350%);
-    }
+  .footer-border::before {
+    transform: translate(-350%);
+  }
 }

@@ -2,16 +2,24 @@ import { useEffect, useRef, useState } from 'react'
 import useStore from "../../store/useStore"
 import { Link, useParams } from 'react-router-dom'
 import EmptyCartImage from "/assets/cart/cart-empty.png"
+import DeleteModal from './DeleteModal'
+import { toast } from 'react-toastify';
 
 const Cart = () => {
 	const [isCartOpened, setIsCartOpened] = useState<boolean>(false);
+	const [selectedItem, setSelectedItem] = useState<{ id: number, name: string } | null>(null);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [deletionType, setDeletionType] = useState<'single' | 'all'>('all');
 	const cartItems = useStore((state) => state.cartItems);
-	const productQuantity = useStore((state) => state.productQuantity);
-	const totalPrice = useStore((state) => state.totalPrice);
+	const totalItems = useStore((state) => state.totalItems);
+	const itemPrice = useStore((state) => state.itemPrice);
 	const increment = useStore((state) => state.increment);
 	const decrement = useStore((state) => state.decrement);
+	const clearCart = useStore((state) => state.clearCart);
 	const cartRef = useRef<HTMLDivElement>(null);
 	const { category, productId } = useParams();
+	const removeItemById = useStore((state) => state.removeItemById);
+
 
 	const handleToggleCart = () => {
 		setIsCartOpened(!isCartOpened)
@@ -41,6 +49,31 @@ const Cart = () => {
 		};
 	}, [isCartOpened])
 
+	const openDeleteModalByItemName = (id: number, name: string) => {
+		setSelectedItem({ id, name });
+		setDeletionType('single');
+		setIsModalOpen(true);
+	};
+
+	const openDeleteModal = () => {
+		console.log('Remove All button clicked')
+		setDeletionType('all');
+		setIsModalOpen(true);
+	};
+
+	const handleDelete = () => {
+		if (deletionType === 'single' && selectedItem) {
+			removeItemById(selectedItem.id);
+			toast.success(`Item ${selectedItem.name} has been removed!`);
+		} else if (deletionType === 'all') {
+			clearCart();
+			toast.success('All items have been removed from the cart!');
+		} else {
+			toast.error('Something went wrong!')
+		}
+		setIsModalOpen(false);
+	};
+
 	return (
 		<div className='pr-[1.75rem] md:pr-[40px] relative lg:pr-[3rem] 1110:pr-0'>
 			<button onClick={handleToggleCart}>
@@ -52,7 +85,7 @@ const Cart = () => {
 			</button>
 			<section ref={cartRef}
 				className={`bg-white cart-container rounded-[8px] py-[2rem] z-50 px-[1.75rem] lg:px-[2rem]
-					${isCartOpened ? '' : 'hidden'}`}>
+						${isCartOpened ? '' : 'hidden'}`}>
 				{cartItems.length === 0 && (
 					<div>
 						<img src={EmptyCartImage} alt="Your Cart is currently empty" />
@@ -62,10 +95,10 @@ const Cart = () => {
 					<div className='flex justify-between items-center mb-6'>
 						<p className='font-bold'>
 							<span>CART</span>
-							<span>({productQuantity})</span>
+							<span>({totalItems})</span>	
 						</p>
 						<button className='underline opacity-50'
-							onClick={() => useStore.getState().clearCart()}>
+							onClick={openDeleteModal}>
 							Remove All
 						</button>
 					</div>
@@ -73,8 +106,8 @@ const Cart = () => {
 				<ul>
 					{cartItems.map((item) => (
 						<li key={item.id} className='mb-6 flex relative'>
-							<button className='self-start absolute inset-0'
-								onClick={() => useStore.getState().removeItemById(item.id)}>
+							<button className='self-start absolute inset-0 w-[16px]'
+								onClick={() => openDeleteModalByItemName(item.id, item.name)}>
 								<svg className="w-[16px]" fill="#FA5252" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M10.053,7.988l5.631,8.024h-1.497L8.566,7.988H10.053z M21,7v10	c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4V7c0-2.209,1.791-4,4-4h10C19.209,3,21,4.791,21,7z M17.538,17l-4.186-5.99L16.774,7	h-1.311l-2.704,3.16L10.552,7H6.702l3.941,5.633L6.906,17h1.333l3.001-3.516L13.698,17H17.538z" /></svg>
 							</button>
 							<div className='flex items-center flex-1'>
@@ -92,15 +125,15 @@ const Cart = () => {
 										</p>
 										<p className='text-[.875rem] opacity-50 font-bold flex gap-1 items-center'>
 											<span>$</span>
-											<span>{totalPrice.toLocaleString()}</span>
+											<span>{itemPrice.toLocaleString()}</span>
 										</p>
 									</div>
 								</div>
 								<div className='bg-lightgray font-bold w-full max-w-[96px] px-[11px] py-[7px] flex justify-between'>
-									<button onClick={() => decrement(item.price)}
+									<button onClick={() => decrement(item.id)}
 										className='opacity-50'>-</button>
-									<span>{productQuantity}</span>
-									<button onClick={() => increment(item.price)}
+									<span>{item.productQuantity}</span>
+									<button onClick={() => increment(item.id)}
 										className='opacity-50'>+</button>
 								</div>
 							</div>
@@ -112,7 +145,7 @@ const Cart = () => {
 								<p className='uppercase opacity-70 text-[.93rem]'>
 									Total
 								</p>
-								<p className='font-bold'>${totalPrice.toLocaleString()}</p>
+								<p className='font-bold'>$</p>
 							</div>
 							<Link to={`/${category}/${productId}/checkout`}
 								className='mt-4 inline-block text-center px-4 py-2 bg-reddish-orange w-full text-white rounded hover:bg-reddish-hover'>
@@ -120,8 +153,16 @@ const Cart = () => {
 							</Link>
 						</div>
 					)}
-
-				</ul>
+				</ul>	
+				{isModalOpen && (
+					<DeleteModal
+						setIsModalOpen={setIsModalOpen}
+						itemName={deletionType === 'single' ? selectedItem?.name || '' : 'all items'	}
+						cancelDelete={() => setIsModalOpen(false)}
+						deleteItem={deletionType === 'single' ? handleDelete : undefined}
+						deleteAll={deletionType === 'all' ? handleDelete : undefined}
+					/>
+				)}
 			</section>
 		</div>
 	)

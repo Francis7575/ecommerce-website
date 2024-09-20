@@ -10,7 +10,7 @@ import {
 } from '../components';
 import data from '../data.json';
 import useStore from '../store/useStore';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const ProductDetail = () => {
 	const { category, productId } = useParams();
@@ -47,7 +47,7 @@ const ProductDetail = () => {
 		console.log(totalPriceState)
 	}
 
-	const priceByProductQuantity = basePrice * productQuantityLocal;
+	const priceByProductQuantity = useMemo(() => basePrice * productQuantityLocal, [basePrice, productQuantityLocal]);
 
 	return (
 		<>

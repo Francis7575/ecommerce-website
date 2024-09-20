@@ -1,21 +1,34 @@
 import useStore from "../../store/useStore"
 import { AddToCartProps } from "../../types/types"
+import { toast } from 'react-toastify';
 
 const AddToCart = ({ increment, decrement, productId, productImage, productName,
 	productPrice, setTotalPriceState, productQuantityLocal, resetDetail }: AddToCartProps) => {
 	const addToCart = useStore((state) => state.addToCart);
 
 	const handleAddToCart = () => {
-		addToCart({
-			id: productId,
-			productQuantity: productQuantityLocal,
-			image: productImage,
-			name: productName,
-			price: productPrice,
-		});
-		resetDetail()
-		setTotalPriceState();
-	};
+    try {
+        const { itemAdded, itemUpdated } = addToCart({
+            id: productId,
+            productQuantity: productQuantityLocal,
+            image: productImage,
+            name: productName,
+            price: productPrice,
+        });
+
+        // Show appropriate toast messages
+        if (itemAdded) {
+            toast.success('Item added to cart!');
+        } else if (itemUpdated) {
+            toast.info('Item quantity updated.');
+        }
+
+        resetDetail();
+        setTotalPriceState();
+    } catch (error) {
+        toast.error('Something went wrong!');
+    }
+};
 
 	return (
 		<div className='flex gap-4 items-center '>
