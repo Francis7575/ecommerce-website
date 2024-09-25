@@ -68,7 +68,7 @@ export type FormData = {
 	eMoneyPin: string,
 }
 
-export interface IRouterType {
+export type IRouterType = {
   title: string;
   path?: string;
   element: JSX.Element;
