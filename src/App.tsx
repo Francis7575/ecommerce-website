@@ -17,7 +17,7 @@ const renderRoutes = (routes: IRouterType[]) => {
 export const PageRouter = () => {
   return (
     <Suspense fallback={<LoadingPage />}>
-      <ToastContainer />
+      <ToastContainer position='bottom-left'/>
       <Routes>{renderRoutes(PAGE_DATA)}</Routes>
     </Suspense>
   );

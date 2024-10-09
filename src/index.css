@@ -47,6 +47,41 @@ img {
   fill: #fbaf85;
 }
 
+.radio-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-container input[type="radio"] {
+  display: none; 
+}
+
+/* Size of the custom radio */
+.radio-container .custom-radio {
+  width: 20px; 
+  height: 20px;
+  border: 1px solid #CFCFCF ; 
+  border-radius: 50%; 
+  background-color: white; 
+  position: relative;
+}
+
+/* .radio-container input[type="radio"]:checked + .custom-radio {
+  border-color: #007BFF; 
+} */
+
+.radio-container input[type="radio"]:checked + .custom-radio:after {
+  content: '';
+  width: 10px; 
+  height: 10px;
+  border-radius: 50%; 
+  background-color: #D87D4A; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+
 @media (min-width: 48em) {
   .footer-border::before {
     transform: translate(-350%);

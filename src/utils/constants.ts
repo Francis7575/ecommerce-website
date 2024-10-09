@@ -53,16 +53,16 @@ const Earphones: ProductItem[] = data
     }));
 
 export const BillingFields = [
-    { name: 'name', type: 'text', id: 'name', label: 'Name' },
-    { name: 'email', type: 'email', id: 'email', label: 'Email Address' },
-    { name: 'phoneNumber', type: 'number', id: 'phoneNumber', label: 'Phone Number' },
+    { name: 'name', type: 'text', id: 'name', label: 'Name', placeholder: 'Alexei Ward' },
+    { name: 'email', type: 'email', id: 'email', label: 'Email Address', placeholder: 'alexei@mail.com' },
+    { name: 'phoneNumber', type: 'number', id: 'phoneNumber', label: 'Phone Number', placeholder: '+1 202-555-0136' },
 ]
 
 export const ShippingFields = [
-    { name: 'address', type: 'text', id: 'address', label: 'Your Address' },
-    { name: 'zipcode', type: 'number', id: 'zipcode', label: 'ZIP Code' },
-    { name: 'city', type: 'text', id: 'city', label: 'City' },
-    { name: 'country', type: 'text', id: 'country', label: 'Country' },
+    { name: 'address', type: 'text', id: 'address', label: 'Your Address', placeholder: '1137 Williams Avenue' },
+    { name: 'zipcode', type: 'number', id: 'zipcode', label: 'ZIP Code', placeholder: '10001' },
+    { name: 'city', type: 'text', id: 'city', label: 'City', placeholder: 'New York' },
+    { name: 'country', type: 'text', id: 'country', label: 'Country', placeholder: 'United States' },
 ]
 
 export const RadioFields = [

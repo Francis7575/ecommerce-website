@@ -61,7 +61,7 @@ const Cart = () => {
 	};
 
 	const handleDelete = () => {
-		if (deletionType === 'single' && selectedItem) {
+		if (selectedItem && deletionType === 'single') {
 			removeItemById(selectedItem.id);
 			toast.success(`Item ${selectedItem.name} has been removed!`);
 		} else if (deletionType === 'all') {
@@ -74,7 +74,7 @@ const Cart = () => {
 	};
 
 	return (
-		<div className='pr-[1.75rem] md:pr-[40px] relative lg:pr-[3rem] 1110:pr-0'>
+		<div className=' pr-[1.75rem] md:pr-[40px] lg:pr-[3rem] relative 1110:pr-0'>
 			<button onClick={handleToggleCart}>
 				<svg width="23" height="20" className='cart' viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Combined Shape 2" >
@@ -94,7 +94,7 @@ const Cart = () => {
 					<div className='flex justify-between items-center mb-6'>
 						<p className='font-bold'>
 							<span>CART</span>
-							<span>({totalItems})</span>	
+							<span>({totalItems})</span>
 						</p>
 						<button className='underline opacity-50'
 							onClick={openDeleteModal}>
@@ -152,11 +152,11 @@ const Cart = () => {
 							</Link>
 						</div>
 					)}
-				</ul>	
+				</ul>
 				{isModalOpen && (
 					<DeleteModal
 						setIsModalOpen={setIsModalOpen}
-						itemName={deletionType === 'single' ? selectedItem?.name || '' : 'all items'	}
+						itemName={deletionType === 'single' ? selectedItem?.name || '' : 'all items'}
 						cancelDelete={() => setIsModalOpen(false)}
 						deleteItem={deletionType === 'single' ? handleDelete : undefined}
 						deleteAll={deletionType === 'all' ? handleDelete : undefined}

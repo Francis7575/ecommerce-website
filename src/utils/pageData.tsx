@@ -5,7 +5,7 @@ const LazyMainLayout = lazy(() => import("../components/Layout"));
 const Home = lazy(() => import("../pages/Home"));
 const ProductCategory = lazy(() => import("../pages/ProductCategory"));
 const ProductDetail = lazy(() => import("../pages/ProductDetail"));
-// const CheckoutForm = lazy(() => import("../pages/checkout/CheckoutForm"));
+const CheckoutForm = lazy(() => import("../pages/CheckoutForm"));
 
 export const PAGE_DATA: IRouterType[] = [
   {
@@ -27,11 +27,11 @@ export const PAGE_DATA: IRouterType[] = [
         path: ":category/:productId",
         element: <ProductDetail />
       },
+      {
+        title: 'CheckOutForm',
+        path: ":category/:productId/checkout",
+        element: <CheckoutForm />
+      },
     ],
   },
-  // {
-  //   title: 'Product Detail',
-  //   path: ":category/:productId/checkout",
-  //   element: <CheckoutForm />
-  // },
 ];

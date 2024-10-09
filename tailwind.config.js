@@ -26,7 +26,8 @@ export default {
         'dark-gray': '#4C4C4C',
         'white': '#FFF',
         'red': '#D73C3C',
-        'third-lightgray': '#CFCFCF'
+        'third-lightgray': '#CFCFCF',
+        'dark-bg': 'rgba(0, 0, 0, 0.5)'
       },
       backgroundImage: {
         'new-product-mobile': 'url("/assets/home/mobile/image-header.jpg")',
