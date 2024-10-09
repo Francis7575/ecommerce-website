@@ -31,13 +31,6 @@ img {
   z-index: 10;
 }
 
-.cart-container {
-  position: absolute;
-  top: 62px;
-  right: 25px;
-  width: 327px;
-}
-
 .social-icons:hover > path,
 .home-icon:hover > path {
   fill: #d87d4a;
@@ -53,16 +46,16 @@ img {
 }
 
 .radio-container input[type="radio"] {
-  display: none; 
+  display: none;
 }
 
 /* Size of the custom radio */
 .radio-container .custom-radio {
-  width: 20px; 
+  width: 20px;
   height: 20px;
-  border: 1px solid #CFCFCF ; 
-  border-radius: 50%; 
-  background-color: white; 
+  border: 1px solid #cfcfcf;
+  border-radius: 50%;
+  background-color: white;
   position: relative;
 }
 
@@ -71,15 +64,15 @@ img {
 } */
 
 .radio-container input[type="radio"]:checked + .custom-radio:after {
-  content: '';
-  width: 10px; 
+  content: "";
+  width: 10px;
   height: 10px;
-  border-radius: 50%; 
-  background-color: #D87D4A; 
+  border-radius: 50%;
+  background-color: #d87d4a;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
 }
 
 @media (min-width: 48em) {

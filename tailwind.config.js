@@ -13,6 +13,7 @@ export default {
       },
       colors: {
         'black': '#191919',
+        'black-40': 'rgba(0, 0, 0, 0.4)',
         'second-black': '#000',
         'dark-blue': '#101010',
         'white-opc-10': 'rgba(255, 255, 255, 0.10)',
