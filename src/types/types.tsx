@@ -13,7 +13,7 @@ export type ProductItem = {
 export type Product = {
 	id: number
 	name: string
-	price: number
+	basePrice: number
 	quantity?: number
 	productQuantity: number
 	image: string

@@ -52,32 +52,9 @@ const Earphones: ProductItem[] = data
         new: 'NEW PRODUCT'
     }));
 
-export const ShippingFields = [
-    { name: 'address', type: 'text', id: 'address', label: 'Your Address', placeholder: '1137 Williams Avenue' },
-    { name: 'zipcode', type: 'number', id: 'zipcode', label: 'ZIP Code', placeholder: '10001' },
-    { name: 'city', type: 'text', id: 'city', label: 'City', placeholder: 'New York' },
-    { name: 'country', type: 'text', id: 'country', label: 'Country', placeholder: 'United States' },
-]
-
 export const RadioFields = [
     { name: 'eMoney', type: 'radio', id: 'eMoney', label: 'e-Money' },
     { name: 'cashDelivery', type: 'radio', id: 'cash delivery', label: 'Cash on Delivery' },
 ]
 
-
 export { Headphones, Speakers, Earphones, Menuitems }
-
-// <div key={idx} className="flex flex-col gap-[9px]">
-//                     <label htmlFor={field.id} className="font-bold tracking-[-0.214px]">
-//                       {field.label}
-//                     </label>
-//                     <input className="border border-third-lightgray pl-[1.5rem] py-[18px] rounded-[8px] outline-none"
-//                       value={formData[field.name as keyof FormData] as string}
-//                       onChange={handleInputChange}
-//                       type={field.type}
-//                       name={field.name}
-//                       id={field.id}
-//                       placeholder={field.placeholder}
-//                     />
-//                   </div>
-//                 ))}

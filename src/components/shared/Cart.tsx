@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import EmptyCartImage from "/assets/cart/cart-empty.png"
 import DeleteModal from './DeleteModal'
 import { toast } from 'react-toastify';
+import { LimitCharacters } from '../../utils/utils'
 
 const Cart = () => {
 	const [isCartOpened, setIsCartOpened] = useState<boolean>(false);
@@ -28,10 +29,6 @@ const Cart = () => {
 	const handleCloseCart = () => {
 		setIsCartOpened(false)
 	}
-
-	const LimitCharacters = (name: string) => {
-		return name.length > 8 ? `${name.slice(0, 12)}` : name;
-	};
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -127,8 +124,7 @@ const Cart = () => {
 											{LimitCharacters(item.name)}
 										</p>
 										<p className='text-[.875rem] opacity-50 font-bold flex gap-1 items-center'>
-											<span>$</span>
-											<span>{(item.price * item.productQuantity).toLocaleString()}</span>
+											{`$ \u00A0${(item.basePrice * item.productQuantity).toLocaleString()}`}
 										</p>
 									</div>
 								</div>
@@ -166,7 +162,7 @@ const Cart = () => {
 						deleteItem={deletionType === 'single' ? handleDelete : undefined}
 						deleteAll={deletionType === 'all' ? handleDelete : undefined}
 					/>
-				)}	
+				)}
 			</section>
 			{isCartOpened && (
 				<div className='bg-black-40 fixed inset-0 w-full h-full z-20'></div>

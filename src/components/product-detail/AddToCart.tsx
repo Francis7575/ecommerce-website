@@ -13,7 +13,7 @@ const AddToCart = ({ increment, decrement, productId, productImage, productName,
             productQuantity: productQuantityLocal,
             image: productImage,
             name: productName,
-            price: productPrice,
+            basePrice: productPrice,
         });
 
         // Show appropriate toast messages
