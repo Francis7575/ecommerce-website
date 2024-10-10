@@ -7,12 +7,8 @@ type Props = {
 const ImageGallery = ({ productId }: Props) => {
   const product = data.find(item => item.id === productId);
 
-  if (!product) {
-    return <div>Product not found</div>;
-  }
-
   // Convert the gallery object values to an array
-  const gallery = Object.values(product.gallery);
+  const gallery = Object.values(product!.gallery);
 
   return (
     <div className='mt-[100px] flex flex-col gap-8 md:flex-row'>
@@ -30,7 +26,7 @@ const ImageGallery = ({ productId }: Props) => {
           <picture>
             <source srcSet={gallery[1].desktop} media="(min-width: 1024px)" />
             <source srcSet={gallery[1].tablet} media="(min-width: 768px)" />
-            <img src={gallery[1].mobile} alt='Gallery image 3' className='max-w-[500px] md:max-w-none mx-auto h-full rounded-[10px]' />
+            <img src={gallery[1].mobile} alt='Gallery image 2' className='max-w-[500px] md:max-w-none mx-auto h-full rounded-[10px]' />
           </picture>
         </div>
       </div>

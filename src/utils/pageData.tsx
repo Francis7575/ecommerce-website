@@ -29,7 +29,7 @@ export const PAGE_DATA: IRouterType[] = [
       },
       {
         title: 'CheckOutForm',
-        path: ":category/:productId/checkout",
+        path: "/checkout",
         element: <CheckoutForm />
       },
     ],

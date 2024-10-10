@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import useStore from "../../store/useStore"
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import EmptyCartImage from "/assets/cart/cart-empty.png"
 import DeleteModal from './DeleteModal'
 import { toast } from 'react-toastify';
@@ -18,7 +18,6 @@ const Cart = () => {
 	const decrement = useStore((state) => state.decrement);
 	const clearCart = useStore((state) => state.clearCart);
 	const cartRef = useRef<HTMLDivElement>(null);
-	const { category, productId } = useParams();
 	const removeItemById = useStore((state) => state.removeItemById);
 
 
@@ -147,7 +146,7 @@ const Cart = () => {
 								<p className='font-bold'>${totalPrice.toLocaleString()}</p>
 							</div>
 							<Link onClick={handleCloseCart}
-								to={`/${category}/${productId}/checkout`}
+								to={`/checkout`}
 								className='mt-4 inline-block text-center px-4 py-2 bg-reddish-orange w-full text-white rounded hover:bg-reddish-hover'>
 								Checkout
 							</Link>

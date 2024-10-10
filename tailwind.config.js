@@ -14,6 +14,7 @@ export default {
       colors: {
         'black': '#191919',
         'black-40': 'rgba(0, 0, 0, 0.4)',
+        'black-20': 'rgba(0, 0, 0, 0.2)',
         'second-black': '#000',
         'dark-blue': '#101010',
         'white-opc-10': 'rgba(255, 255, 255, 0.10)',
@@ -28,6 +29,7 @@ export default {
         'white': '#FFF',
         'red': '#D73C3C',
         'third-lightgray': '#CFCFCF',
+        'fourth-lightgray': '#F1F1F1',
         'dark-bg': 'rgba(0, 0, 0, 0.5)'
       },
       backgroundImage: {
